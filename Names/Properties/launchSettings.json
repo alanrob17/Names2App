@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Names": {
+      "commandName": "Project",
+      "commandLineArgs": "sw"
+    }
+  }
+}
