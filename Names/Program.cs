@@ -55,7 +55,7 @@ namespace Names
                     await argumentService.RunArgumentOperations();
                 }
 
-                Log.Information("All database operations completed successfully");
+                Log.Information("Finished.");
             }
             catch (Exception ex)
             {
@@ -65,10 +65,6 @@ namespace Names
             {
                 Log.CloseAndFlush();
             }
-
-            //var argList = GetArguments(args);
-
-            //var fileDirectory = Environment.CurrentDirectory + @"\";
         }
     }
 }

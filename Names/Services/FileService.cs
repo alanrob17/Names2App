@@ -1,4 +1,5 @@
-﻿using Names.Services.Output;
+﻿using Names.Models;
+using Names.Services.Output;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -33,11 +34,6 @@ namespace Names.Services
                 {
                     await _outputService.WriteLineAsync($"Would rename file: {file}");
                 }
-            }
-
-            if (argList.ChangeFolderName)
-            {
-                await _outputService.WriteLineAsync("Would rename folders (not implemented)");
             }
         }
     }

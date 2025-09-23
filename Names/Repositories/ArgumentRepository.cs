@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Names.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,9 @@ namespace Names.Repositories
     {
         public ArgList GetArguments(IList<string> args)
         {
-            // TODO: add multiple arguments S = subdir, W = write only, F = change folders           
+            // TODO: add multiple arguments S = subdir, W = write only
             var subFolders = false;
             var changeFileNames = false;
-            var changeFolders = false;
 
             if (args.Count == 1)
             {
@@ -27,14 +27,9 @@ namespace Names.Repositories
                 {
                     changeFileNames = true;
                 }
-
-                if (arg.Contains("f"))
-                {
-                    changeFolders = true;
-                }
             }
 
-            var argList = new ArgList(subFolders, changeFileNames, changeFolders);
+            var argList = new ArgList(subFolders, changeFileNames);
 
             return argList;
         }

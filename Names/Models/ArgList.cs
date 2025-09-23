@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Names
+namespace Names.Models
 {
     public class ArgList
     {
-        public ArgList(bool subFolder, bool changeFileName, bool changeFolderName)
+        public ArgList(bool subFolder, bool changeFileName)
         {
-            this.SubFolder = subFolder;
-            this.ChangeFileName = changeFileName;
-            this.ChangeFolderName = changeFolderName;
+            SubFolder = subFolder;
+            ChangeFileName = changeFileName;
         }
 
         /// <summary>
@@ -24,10 +23,5 @@ namespace Names
         /// Gets or sets a value indicating whether to change file names.
         /// </summary>
         public bool ChangeFileName { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to change folder names.
-        /// </summary>
-        public bool ChangeFolderName { get; set; }
     }
 }
