@@ -15,5 +15,9 @@ namespace Names.Models
         public string ChangeName { get; set; }
 
         public bool Changed { get; set; }
+
+        public string Path { get; set; }
+
+        public string Extension { get; set; }
     }
 }

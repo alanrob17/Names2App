@@ -1,4 +1,5 @@
-﻿using Names.Models;
+﻿using Microsoft.Extensions.Hosting;
+using Names.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,6 +26,30 @@ namespace Names.Repositories
             }
 
             return fileList;
+        }
+
+        public IEnumerable<Item> GetItemList(IEnumerable<string> fileList)
+        {
+            IEnumerable<Item> items = new List<Item>();
+            var count = 0;
+
+            foreach (var file in fileList)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(file);
+                var item = new Item
+                {
+                    ItemId = count++,
+                    Name = fileName,
+                    ChangeName = fileName,
+                    Changed = false,
+                    Path = Path.GetDirectoryName(file),
+                    Extension = Path.GetExtension(file)
+                };
+
+                items = items.Append(item);
+            }
+
+            return items;
         }
 
         private void GetFiles(DirectoryInfo d, ICollection<string> fileList, bool recursive = true)

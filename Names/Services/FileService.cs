@@ -19,20 +19,19 @@ namespace Names.Services
 
         public async Task RunFileOperations(ArgList argList)
         {
+            int count = 0;
             string rootFolder = Directory.GetCurrentDirectory();
 
             IEnumerable<string> fileList = _repository.GetFileList(rootFolder, argList);
 
-            foreach (var file in fileList)
-            {
-                await _outputService.WriteLineAsync($"Found file: {file}");
-            }
 
+            IEnumerable<Item> items = _repository.GetItemList(fileList);
+                
             if (argList.ChangeFileName)
             {
-                foreach (var file in fileList)
+                foreach (var file in items)
                 {
-                    await _outputService.WriteLineAsync($"Would rename file: {file}");
+                    await _outputService.WriteLineAsync($"file: {file.ItemId} - {file.Name}");
                 }
             }
         }

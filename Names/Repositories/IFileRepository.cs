@@ -6,5 +6,6 @@ namespace Names.Repositories
     public interface IFileRepository
     {
         IEnumerable<string> GetFileList(string rootFolder, ArgList argList);
+        IEnumerable<Item> GetItemList(IEnumerable<string> fileList);
     }
 }
