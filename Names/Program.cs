@@ -11,8 +11,6 @@ namespace Names
     {
         public static async Task Main(string[] args)
         {
-            var fileDirectory = Environment.CurrentDirectory + @"\";
-
             // Configure Serilog early to capture startup logs
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
