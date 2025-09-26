@@ -40,14 +40,17 @@ namespace Names.Services
                 item.ChangeName = _repository.ModifyName(item.ChangeName, "\\s+");
                 item.ChangeName = _repository.AddSpaces(item.ChangeName);
 
-                if (item.ChangeName == item.ChangeName.ToUpperInvariant())
+                await _outputService.WriteLineAsync($"{argList.ProperCase}");
+
+                if (item.ChangeName == item.ChangeName.ToUpperInvariant() || argList.ProperCase == true)
                 {
                     item.ChangeName = item.ChangeName.ToLowerInvariant(); // .ToTitleCase() won't change uppercase filenames
+                    item.ChangeName = _repository.FixCase(item.ChangeName);
                 }
 
                 item.ChangeName = _repository.FixTerms(item.ChangeName);
-                item.ChangeName = _repository.FixCase(item.ChangeName);
-                item.ChangeName = _repository.FixTerms(item.ChangeName);
+                //item.ChangeName = _repository.FixCase(item.ChangeName);
+                //item.ChangeName = _repository.FixTerms(item.ChangeName);
                 item.ChangeName = _repository.CleanFileName(item.ChangeName);
 
             }

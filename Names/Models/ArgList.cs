@@ -8,10 +8,11 @@ namespace Names.Models
 {
     public class ArgList
     {
-        public ArgList(bool subFolder, bool changeFileName)
+        public ArgList(bool subFolder, bool changeFileName, bool properCase)
         {
             SubFolder = subFolder;
             ChangeFileName = changeFileName;
+            ProperCase = properCase;
         }
 
         /// <summary>
@@ -23,5 +24,7 @@ namespace Names.Models
         /// Gets or sets a value indicating whether to change file names.
         /// </summary>
         public bool ChangeFileName { get; set; }
+
+        public bool ProperCase { get; set; }
     }
 }

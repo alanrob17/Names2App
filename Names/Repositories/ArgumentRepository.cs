@@ -14,6 +14,7 @@ namespace Names.Repositories
             // TODO: add multiple arguments S = subdir, W = write only
             var subFolders = false;
             var changeFileNames = false;
+            var properCase = false;
 
             if (args.Count == 1)
             {
@@ -27,9 +28,14 @@ namespace Names.Repositories
                 {
                     changeFileNames = true;
                 }
+
+                if (arg.Contains("p"))
+                {
+                    properCase = true;
+                }
             }
 
-            var argList = new ArgList(subFolders, changeFileNames);
+            var argList = new ArgList(subFolders, changeFileNames, properCase);
 
             return argList;
         }
