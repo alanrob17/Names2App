@@ -174,7 +174,7 @@ namespace Names.Repositories
                 ("6TH","6th"),
                 ("7TH","7th"),
                 ("8TH","8th"),
-                ("8TH","9th")
+                ("9TH","9th")
             };
 
             foreach (var (find, replace) in replacements)
