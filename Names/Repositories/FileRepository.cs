@@ -119,7 +119,7 @@ namespace Names.Repositories
                 return filename;
 
             // Characters to trim from start and end
-            char[] trimChars = { '.', '-', '_', ' ' };
+            char[] trimChars = { '.', '-', '_', ' ', '!' };
 
             // Trim repeatedly until no more changes occur
             string previous;
@@ -213,6 +213,18 @@ namespace Names.Repositories
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
+        public string RemoveEmojis(string filename)
+        {
+            var emojisToRemove = new[] { "🎃", "🍑", "💦", "🍆", "❌" };
+
+            foreach (var emoji in emojisToRemove)
+            {
+                filename = filename.Replace(emoji, string.Empty);
+            }
+
+            return filename;
+        }
+
         public void WriteReport(IEnumerable<Item> items)
         {
             var outFile = Environment.CurrentDirectory + "\\alan.log";
@@ -222,12 +234,29 @@ namespace Names.Repositories
             // TODO: delete the log file if it exists
             foreach (var item in items.Where(item => item.Changed))
             {
-                sw.WriteLine("{0}\nto\n{1}\n\n", item.Name, item.ChangeName);
+                var originalName = $"{item.Path}\\{item.Name}{item.Extension}";
+                var newName = $"{item.Path}\\{item.ChangeName}{item.Extension}";
+                sw.WriteLine($"{originalName}\nto\n{newName}\n\n");
             }
 
             // flush and close
             sw.Flush();
             sw.Close();
+        }
+
+        public string RemoveNames(string filename)
+        {
+            var names = new Test().GetNames();
+
+            foreach (string line in names)
+            {
+                if (filename.ToLowerInvariant().Contains(line))
+                {
+                    filename = ReplaceEx(filename, line, string.Empty);
+                }
+            }
+
+            return filename;
         }
 
         private static string ReplaceEx(string original, string pattern, string replacement)

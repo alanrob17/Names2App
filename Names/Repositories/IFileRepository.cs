@@ -16,6 +16,8 @@ namespace Names.Repositories
         string FixCase(string filename);
         string CleanFileName(string filename);
         string RemoveDiacritics(string filename);
+        string RemoveEmojis(string filename);
         void WriteReport(IEnumerable<Item> items);
+        string RemoveNames(string filename);
     }
 }

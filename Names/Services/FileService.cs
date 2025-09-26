@@ -27,34 +27,39 @@ namespace Names.Services
             IEnumerable<string> fileList = _repository.GetFileList(rootFolder, argList);
 
             IEnumerable<Item> items = _repository.GetItemList(fileList);
-                
-            if (argList.ChangeFileName)
+
+            // This is where I change the files.
+            foreach (var item in items)
             {
-                // This is where I change the files.
-                foreach (var item in items)
+                item.ChangeName = _repository.RemoveNames(item.ChangeName);
+                item.ChangeName = _repository.RemoveEmojis(item.ChangeName);
+                item.ChangeName = _repository.RemoveDiacritics(item.ChangeName);
+                item.ChangeName = _repository.RemovePhrase(item.ChangeName, phrases);
+                item.ChangeName = _repository.ModifyName(item.ChangeName, "\\.");
+                item.ChangeName = _repository.ModifyName(item.ChangeName, "_");
+                item.ChangeName = _repository.ModifyName(item.ChangeName, "\\s+");
+                item.ChangeName = _repository.AddSpaces(item.ChangeName);
+
+                if (item.ChangeName == item.ChangeName.ToUpperInvariant())
                 {
-                    item.ChangeName = _repository.RemoveDiacritics(item.ChangeName);
-                    item.ChangeName = _repository.RemovePhrase(item.ChangeName, phrases);
-                    item.ChangeName = _repository.ModifyName(item.ChangeName, "\\.");
-                    item.ChangeName = _repository.ModifyName(item.ChangeName, "_");
-                    item.ChangeName = _repository.ModifyName(item.ChangeName, "\\s+");
-                    item.ChangeName = _repository.AddSpaces(item.ChangeName);
-
-                    if (item.ChangeName == item.ChangeName.ToUpperInvariant())
-                    {
-                        item.ChangeName = item.ChangeName.ToLowerInvariant(); // .ToTitleCase() won't change uppercase filenames
-                    }
-
-                    item.ChangeName = _repository.FixTerms(item.ChangeName);
-                    item.ChangeName = _repository.FixCase(item.ChangeName);
-                    item.ChangeName = _repository.FixTerms(item.ChangeName);
-                    item.ChangeName = _repository.CleanFileName(item.ChangeName);
+                    item.ChangeName = item.ChangeName.ToLowerInvariant(); // .ToTitleCase() won't change uppercase filenames
                 }
 
-                _repository.ModifyStatus(items);
-                _repository.ChangeFileNames(items);
-                _repository.WriteReport(items);
+                item.ChangeName = _repository.FixTerms(item.ChangeName);
+                item.ChangeName = _repository.FixCase(item.ChangeName);
+                item.ChangeName = _repository.FixTerms(item.ChangeName);
+                item.ChangeName = _repository.CleanFileName(item.ChangeName);
+
             }
+                
+            _repository.ModifyStatus(items);
+            
+            if (argList.ChangeFileName)
+            { 
+                _repository.ChangeFileNames(items);
+            }
+
+            _repository.WriteReport(items);
         }
 
         private static List<string> CreatePhraseList()
@@ -75,7 +80,7 @@ namespace Names.Services
                 "avxhom",
                 "ebook",
                 "e-book",
-                "a novel",
+                "a novel"
             };
         }
     }
