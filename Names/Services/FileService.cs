@@ -31,6 +31,8 @@ namespace Names.Services
             // This is where I change the files.
             foreach (var item in items)
             {
+
+                item.ChangeName = _repository.ChangeCharacter(item.ChangeName);
                 item.ChangeName = _repository.RemoveNames(item.ChangeName);
                 item.ChangeName = _repository.RemoveEmojis(item.ChangeName);
                 item.ChangeName = _repository.RemoveDiacritics(item.ChangeName);

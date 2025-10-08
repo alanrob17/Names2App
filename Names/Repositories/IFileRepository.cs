@@ -19,5 +19,6 @@ namespace Names.Repositories
         string RemoveEmojis(string filename);
         void WriteReport(IEnumerable<Item> items);
         string RemoveNames(string filename);
+        string ChangeCharacter(string filename);
     }
 }

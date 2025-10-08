@@ -215,7 +215,7 @@ namespace Names.Repositories
 
         public string RemoveEmojis(string filename)
         {
-            var emojisToRemove = new[] { "🎃", "🍑", "💦", "🍆", "❌" };
+            var emojisToRemove = new[] { "🎃", "🍑", "💦", "🍆", "❌", "💓", "❤", "🔥" };
 
             foreach (var emoji in emojisToRemove)
             {
@@ -315,6 +315,27 @@ namespace Names.Repositories
                     GetFiles(dir, fileList, true);
                 }
             }
+        }
+
+        public string ChangeCharacter(string filename)
+        {
+            var replacements = new Dictionary<string, string>
+                {
+                    { "’", "'" },
+                    { "“", "\"" },
+                    { "”", "\"" },
+                    { "–", "-" }, 
+                    { "—", "-" },
+                    { "„", "\"" },
+                    { "´", "'" } 
+                };
+
+            foreach (var replacement in replacements)
+            {
+                filename = ReplaceEx(filename, replacement.Key, replacement.Value);
+            }
+
+            return filename;
         }
     }
 }
