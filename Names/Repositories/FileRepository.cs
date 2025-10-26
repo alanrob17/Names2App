@@ -215,7 +215,7 @@ namespace Names.Repositories
 
         public string RemoveEmojis(string filename)
         {
-            var emojisToRemove = new[] { "🎃", "🍑", "💦", "🍆", "❌", "💓", "❤", "🔥" };
+            var emojisToRemove = new[] { "🎃", "🍑", "💦", "🍆", "❌", "💓", "❤", "🔥", "😈", "🥵" };
 
             foreach (var emoji in emojisToRemove)
             {
